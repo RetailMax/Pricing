@@ -7,20 +7,21 @@ import jakarta.persistence.*;
 
 
 @Entity
-@Table(name = "producto")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Producto {
+public class Variante {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Long id;
 
-    @Column(nullable = false)
-    private String nombre;
+    private String tipo;  
 
-    @Column(nullable = true)
-    private String descripcion;
-    
+    private String valor; 
+
+    @ManyToOne
+    @JoinColumn(name = "producto_id")
+    private Producto producto;
 
 }
+
