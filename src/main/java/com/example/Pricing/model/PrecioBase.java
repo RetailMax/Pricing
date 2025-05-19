@@ -1,12 +1,12 @@
 package com.example.Pricing.model;
 
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import java.time.LocalDateTime;
 import jakarta.persistence.*;
-import java.util.List;
-
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Table(name = "precios_base")
@@ -17,7 +17,7 @@ public class PrecioBase {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Integer id;
 
     @Column(nullable = false)
     private double monto;
@@ -30,6 +30,13 @@ public class PrecioBase {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "producto_id")
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"}) 
     private Producto producto;
 
+    public PrecioBase(double monto, LocalDateTime fechaCreacion, boolean activo, Producto producto) {
+        this.monto = monto;
+        this.fechaCreacion = fechaCreacion;
+        this.activo = activo;
+        this.producto = producto;
+    }
 }

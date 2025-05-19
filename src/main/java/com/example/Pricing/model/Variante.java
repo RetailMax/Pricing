@@ -13,7 +13,7 @@ import jakarta.persistence.*;
 public class Variante {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Integer id;
 
     private String tipo;  
 
@@ -22,6 +22,12 @@ public class Variante {
     @ManyToOne
     @JoinColumn(name = "producto_id")
     private Producto producto;
+
+    public Variante(String tipo, String valor, Producto producto) {
+    this.tipo = tipo;
+    this.valor = valor;
+    this.producto = producto;
+}
 
 }
 
