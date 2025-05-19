@@ -1,16 +1,15 @@
 package com.example.Pricing.controller;
+import com.example.Pricing.model.PrecioBase; 
+import com.example.Pricing.repository.PrecioBaseRepository; 
+import org.springframework.http.ResponseEntity; 
+import org.springframework.web.bind.annotation.*; 
+import java.util.List; 
+import java.util.Optional; 
 
-import com.example.Pricing.model.PrecioBase;
-import com.example.Pricing.repository.PrecioBaseRepository;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
-import java.util.List;
-import java.util.Optional;
 
-@RestController
-@RequestMapping("/api/precios")
+@RestController 
+@RequestMapping("/api/precios") 
 public class PricingController {
-    
     private final PrecioBaseRepository precioBaseRepository;
     public PricingController(PrecioBaseRepository precioBaseRepository) {
         this.precioBaseRepository = precioBaseRepository;
@@ -39,4 +38,6 @@ public class PricingController {
             return ResponseEntity.notFound().build();
         }
     }
+
+ 
 }
