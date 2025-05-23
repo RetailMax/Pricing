@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/api/precios")
+@RequestMapping("/api/precios/base")
 public class PricingController {
     
     private final PrecioBaseRepository precioBaseRepository;
