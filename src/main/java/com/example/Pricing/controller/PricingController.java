@@ -1,7 +1,11 @@
 package com.example.Pricing.controller;
 
 import com.example.Pricing.model.PrecioBase;
+import com.example.Pricing.model.Promocion;
+import com.example.Pricing.model.Variante;
 import com.example.Pricing.repository.PrecioBaseRepository;
+import com.example.Pricing.repository.PromocionRepository;
+import com.example.Pricing.repository.VarianteRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -9,18 +13,22 @@ import java.util.List;
 import java.util.Optional;
 import com.example.Pricing.services.PrecioBaseService;
 
-
 @RestController
 @RequestMapping("/api/preciosBase")
 public class PricingController {
 
     private final PrecioBaseRepository precioBaseRepository;
     private final PrecioBaseService precioBaseService;
+    private final PromocionRepository promocionRepository;
+    private final VarianteRepository varianteRepository;
 
 
-    public PricingController(PrecioBaseRepository precioBaseRepository, PrecioBaseService precioBaseService) {
+
+    public PricingController(PrecioBaseRepository precioBaseRepository, PrecioBaseService precioBaseService, PromocionRepository promocionRepository, VarianteRepository varianteRepository) {
         this.precioBaseRepository = precioBaseRepository;
         this.precioBaseService = precioBaseService;
+        this.promocionRepository = promocionRepository;
+        this.varianteRepository = varianteRepository;
     }
 
     @GetMapping
@@ -62,4 +70,34 @@ public class PricingController {
     List<PrecioBase> preciosGuardados = precioBaseService.guardarPreciosBase(preciosBase);
     return ResponseEntity.status(HttpStatus.CREATED).body(preciosGuardados);
     }
+
+    @GetMapping("/{productoId}/precioFinal")
+    public ResponseEntity<Double> obtenerPrecioFinal(@PathVariable Integer productoId, @RequestParam(required = false) Optional<Integer> varianteId){
+        
+        PrecioBase precioBase = precioBaseRepository.findById(productoId).orElseThrow(()-> new RuntimeException("Precio no encontrado"));
+
+        double precioFinal = precioBase.getMonto();
+        double agregadoPorVariante = 0.0;
+
+        if (varianteId.isPresent()){
+            Variante variante = varianteRepository.findById(varianteId.get()).orElseThrow(() -> new RuntimeException("Variante no encontrada"));
+            agregadoPorVariante = variante.getValor();
+            precioFinal += agregadoPorVariante;
+        }
+
+        Optional<Promocion> promocionActiva = promocionRepository.findByProductoIdAndActivoTrue(productoId);
+
+        if (promocionActiva.isPresent()) {
+            Promocion promocion = promocionActiva.get();
+            double porcentajeDescuento = promocion.getPorcentajeDescuento();
+            double descuentoAplicado = precioFinal * (porcentajeDescuento/100.0);
+            precioFinal -= descuentoAplicado;
+        }
+
+        return ResponseEntity.ok(precioFinal);
+
+
+    }
+
+    
 }

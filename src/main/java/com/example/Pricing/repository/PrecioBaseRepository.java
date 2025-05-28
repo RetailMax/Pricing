@@ -15,7 +15,7 @@ public interface PrecioBaseRepository extends JpaRepository<PrecioBase, Integer>
     List<PrecioBase> findAllPreciosBase();
 
     @Query("SELECT p FROM PrecioBase p WHERE p.producto.id = :productoId")
-    List<PrecioBase> findPreciosBaseByProductoId(@Param("productoId") Integer productoId);
+    PrecioBase findPreciosBaseByProductoId(@Param("productoId") Integer productoId);
 
     @Query("SELECT v FROM PrecioBase v WHERE v.fechaCreacion = :fechaCreacion")
     List<PrecioBase> buscaPorFecha(@Param("fechaCreacion") LocalDateTime fechaCreacion);

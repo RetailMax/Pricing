@@ -4,6 +4,7 @@ import com.example.Pricing.model.Promocion;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -25,6 +26,8 @@ public interface PromocionRepository extends JpaRepository<Promocion, Integer> {
 
     @Query("SELECT p FROM Promocion p WHERE p.nombre = :nombre")
     List<Promocion> buscaPorNombre(@Param("nombre") String nombre);
+
+    Optional<Promocion> findByProductoIdAndActivoTrue(Integer productoId);
 
 }
 

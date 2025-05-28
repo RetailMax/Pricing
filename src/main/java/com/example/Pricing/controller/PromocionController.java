@@ -63,4 +63,6 @@ public class PromocionController {
     List<Promocion> promocionesGuardadas = promocionService.guardarPromocionLote(promocion);
     return ResponseEntity.status(HttpStatus.CREATED).body(promocionesGuardadas);
     }
+
+    
 }
