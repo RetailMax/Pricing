@@ -15,14 +15,13 @@ import com.example.Pricing.services.PrecioBaseService;
 public class PricingController {
 
     private final PrecioBaseRepository precioBaseRepository;
-    private final PrecioBaseService precioBaseService; // Declara el servicio
+    private final PrecioBaseService precioBaseService;
 
-    // Inyecta ambos repositorios y servicios en el constructor
+
     public PricingController(PrecioBaseRepository precioBaseRepository, PrecioBaseService precioBaseService) {
         this.precioBaseRepository = precioBaseRepository;
-        this.precioBaseService = precioBaseService; // Asigna el servicio inyectado
+        this.precioBaseService = precioBaseService;
     }
-
 
     @GetMapping
     public List<PrecioBase> obtenerPrecios() {
