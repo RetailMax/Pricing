@@ -8,6 +8,7 @@ import jakarta.persistence.*;
 @Table(name = "producto")
 @Data
 @NoArgsConstructor
+@AllArgsConstructor
 public class Producto {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -15,8 +16,5 @@ public class Producto {
     private String nombre;
     private String descripcion;
 
-    public Producto(String nombre, String descripcion) {
-        this.nombre = nombre;
-        this.descripcion = descripcion;
-    }
+
 }

@@ -29,14 +29,8 @@ public class PrecioBase {
     private boolean activo;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "producto_id")
-    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"}) 
-    private Producto producto;
+    @JoinColumn(name = "variante_id") 
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})  
+    private Variante variante;
 
-    public PrecioBase(double monto, LocalDateTime fechaCreacion, boolean activo, Producto producto) {
-        this.monto = monto;
-        this.fechaCreacion = fechaCreacion;
-        this.activo = activo;
-        this.producto = producto;
-    }
 }

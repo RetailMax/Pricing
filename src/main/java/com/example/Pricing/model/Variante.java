@@ -14,20 +14,13 @@ public class Variante {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-
     private String tipo;  
-
-    private String valor; 
+    private Float valor; 
 
     @ManyToOne
     @JoinColumn(name = "producto_id")
     private Producto producto;
 
-    public Variante(String tipo, String valor, Producto producto) {
-    this.tipo = tipo;
-    this.valor = valor;
-    this.producto = producto;
-}
 
 }
 

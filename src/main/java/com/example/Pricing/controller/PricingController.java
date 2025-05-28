@@ -2,24 +2,37 @@ package com.example.Pricing.controller;
 
 import com.example.Pricing.model.PrecioBase;
 import com.example.Pricing.repository.PrecioBaseRepository;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
+import com.example.Pricing.services.PrecioBaseService;
+
 
 @RestController
-@RequestMapping("/api/precios/base")
+@RequestMapping("/api/preciosBase")
 public class PricingController {
-    
+
     private final PrecioBaseRepository precioBaseRepository;
-    public PricingController(PrecioBaseRepository precioBaseRepository) {
+    private final PrecioBaseService precioBaseService; // Declara el servicio
+
+    // Inyecta ambos repositorios y servicios en el constructor
+    public PricingController(PrecioBaseRepository precioBaseRepository, PrecioBaseService precioBaseService) {
         this.precioBaseRepository = precioBaseRepository;
+        this.precioBaseService = precioBaseService; // Asigna el servicio inyectado
     }
 
 
     @GetMapping
     public List<PrecioBase> obtenerPrecios() {
         return precioBaseRepository.findAll();
+    }
+
+    @PostMapping
+    public ResponseEntity<PrecioBase> crearPrecioBase(@RequestBody PrecioBase precioBase) {
+    PrecioBase nuevoPrecio = precioBaseRepository.save(precioBase);
+    return ResponseEntity.status(HttpStatus.CREATED).body(nuevoPrecio);
     }
 
     @GetMapping("/{id}")
@@ -38,5 +51,16 @@ public class PricingController {
         } else {
             return ResponseEntity.notFound().build();
         }
+    }
+
+
+    @PostMapping("/lote")
+    public ResponseEntity<List<PrecioBase>> crearPreciosBaseLote(@RequestBody List<PrecioBase> preciosBase) {
+    if (preciosBase == null || preciosBase.isEmpty()) {
+        return ResponseEntity.badRequest().build();
+    }
+
+    List<PrecioBase> preciosGuardados = precioBaseService.guardarPreciosBase(preciosBase);
+    return ResponseEntity.status(HttpStatus.CREATED).body(preciosGuardados);
     }
 }
