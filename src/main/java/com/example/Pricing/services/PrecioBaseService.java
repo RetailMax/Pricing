@@ -20,8 +20,8 @@ public class PrecioBaseService {
         return precioBaseRepository.findAll();
     }
 
-    public List<Map<String, Object>> obtenerPreciosBasePorProducto(Integer varianteId) {
-    return precioBaseRepository.findPreciosBaseByVarianteId(varianteId)
+    public List<Map<String, Object>> obtenerPreciosBasePorProducto(Integer productoId) {
+    return precioBaseRepository.findPreciosBaseByProductoId(productoId)
         .stream()
         .map(precio -> {
             Map<String, Object> map = new java.util.HashMap<>();

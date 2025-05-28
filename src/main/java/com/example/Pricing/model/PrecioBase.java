@@ -29,8 +29,8 @@ public class PrecioBase {
     private boolean activo;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "variante_id") 
+    @JoinColumn(name = "producto_id") 
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})  
-    private Variante variante;
+    private Producto producto;
 
 }
