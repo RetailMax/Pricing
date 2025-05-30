@@ -3,7 +3,6 @@ package com.example.Pricing.model;
 import lombok.*;
 import jakarta.persistence.*;
 
-
 @Entity
 @Table(name = "producto")
 @Data
@@ -15,6 +14,9 @@ public class Producto {
     private Integer id;
     private String nombre;
     private String descripcion;
+
+    @Version
+    private Integer version;
 
 
 }

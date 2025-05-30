@@ -4,6 +4,7 @@ import com.example.Pricing.model.Producto;
 import com.example.Pricing.repository.ProductoRepository;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import java.util.List;
 import java.util.Optional;
@@ -12,11 +13,8 @@ import java.util.Optional;
 @RequestMapping("/api/productos")
 public class ProductoController {
 
-    private final ProductoRepository productoRepository;
-    public ProductoController(ProductoRepository productoRepository) {
-        this.productoRepository = productoRepository;
-    }
-
+    @Autowired
+    private ProductoRepository productoRepository;
 
     @GetMapping
     public ResponseEntity<List<Producto>> obtenerProductos() {

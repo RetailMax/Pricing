@@ -6,6 +6,8 @@ import com.example.Pricing.model.Variante;
 import com.example.Pricing.repository.PrecioBaseRepository;
 import com.example.Pricing.repository.PromocionRepository;
 import com.example.Pricing.repository.VarianteRepository;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -17,29 +19,18 @@ import com.example.Pricing.services.PrecioBaseService;
 @RequestMapping("/api/preciosBase")
 public class PricingController {
 
-    private final PrecioBaseRepository precioBaseRepository;
-    private final PrecioBaseService precioBaseService;
-    private final PromocionRepository promocionRepository;
-    private final VarianteRepository varianteRepository;
-
-
-
-    public PricingController(PrecioBaseRepository precioBaseRepository, PrecioBaseService precioBaseService, PromocionRepository promocionRepository, VarianteRepository varianteRepository) {
-        this.precioBaseRepository = precioBaseRepository;
-        this.precioBaseService = precioBaseService;
-        this.promocionRepository = promocionRepository;
-        this.varianteRepository = varianteRepository;
-    }
+    @Autowired
+    private PrecioBaseRepository precioBaseRepository;
+    @Autowired
+    private PrecioBaseService precioBaseService;
+    @Autowired
+    private PromocionRepository promocionRepository;
+    @Autowired
+    private VarianteRepository varianteRepository;
 
     @GetMapping
     public List<PrecioBase> obtenerPrecios() {
         return precioBaseRepository.findAll();
-    }
-
-    @PostMapping
-    public ResponseEntity<PrecioBase> crearPrecioBase(@RequestBody PrecioBase precioBase) {
-    PrecioBase nuevoPrecio = precioBaseRepository.save(precioBase);
-    return ResponseEntity.status(HttpStatus.CREATED).body(nuevoPrecio);
     }
 
     @GetMapping("/{id}")
@@ -60,15 +51,20 @@ public class PricingController {
         }
     }
 
+    @PostMapping
+    public ResponseEntity<PrecioBase> crearPrecioBase(@RequestBody PrecioBase precioBase) {
+    PrecioBase nuevoPrecio = precioBaseRepository.save(precioBase);
+    return ResponseEntity.status(HttpStatus.CREATED).body(nuevoPrecio);
+    }
 
     @PostMapping("/lote")
     public ResponseEntity<List<PrecioBase>> crearPreciosBaseLote(@RequestBody List<PrecioBase> preciosBase) {
-    if (preciosBase == null || preciosBase.isEmpty()) {
-        return ResponseEntity.badRequest().build();
-    }
+        if (preciosBase == null || preciosBase.isEmpty()) {
+            return ResponseEntity.badRequest().build();
+        }
 
-    List<PrecioBase> preciosGuardados = precioBaseService.guardarPreciosBase(preciosBase);
-    return ResponseEntity.status(HttpStatus.CREATED).body(preciosGuardados);
+        List<PrecioBase> preciosGuardados = precioBaseService.guardarPreciosBase(preciosBase);
+        return ResponseEntity.status(HttpStatus.CREATED).body(preciosGuardados);
     }
 
     @GetMapping("/{productoId}/precioFinal")

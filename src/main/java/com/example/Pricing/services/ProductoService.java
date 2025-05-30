@@ -1,32 +1,50 @@
 package com.example.Pricing.services;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 import java.util.List;
 import com.example.Pricing.model.Producto;
 import com.example.Pricing.repository.ProductoRepository;
 
-
 @Service
 public class ProductoService {
 
-    @Autowired
-    private ProductoRepository productoRepository;
+    @PersistenceContext
+    private EntityManager entityManager;
 
-    public List<Producto> findAll(){
+    private final ProductoRepository productoRepository;
+
+    public ProductoService(ProductoRepository productoRepository) {
+        this.productoRepository = productoRepository;
+    }
+
+    public List<Producto> findAll() {
         return productoRepository.findAll();
     }
 
-    public Producto ObtenerProductoPorId(Integer id){
-        return productoRepository.findById(id).get();
+    public Producto obtenerProductoPorId(Integer id) {
+        return productoRepository.findById(id).orElse(null);
     }
 
+    @Transactional
     public Producto guardarProducto(Producto producto) {
+        if (producto.getId() != null) { 
+            producto = entityManager.merge(producto); 
+        }
         return productoRepository.save(producto);
     }
 
-    public void borrarProducto(Integer id){
-        productoRepository.deleteById(id);
+    @Transactional
+    public List<Producto> guardarProductos(List<Producto> productos) {
+        return productos.stream()
+            .map(producto -> producto.getId() == null ? productoRepository.save(producto) : entityManager.merge(producto)) 
+            .toList();
     }
 
+    public void borrarProducto(Integer id) {
+        productoRepository.deleteById(id);
+    }
 }

@@ -1,9 +1,10 @@
 package com.example.Pricing.controller;
 
-import com.example.Pricing.model.Producto;
+
 import com.example.Pricing.model.Variante;
 import com.example.Pricing.services.VarianteService;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -15,11 +16,8 @@ import java.util.Optional;
 @RequestMapping("/api/variantes")
 public class VarianteController {
 
-    private final VarianteService varianteService;
-
-    public VarianteController(VarianteService varianteService) {
-        this.varianteService = varianteService;
-    }
+    @Autowired
+    private VarianteService varianteService;
 
     @GetMapping
     public ResponseEntity<List<Variante>> obtenerVariantes() {

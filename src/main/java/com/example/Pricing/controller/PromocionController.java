@@ -2,6 +2,8 @@ package com.example.Pricing.controller;
 
 import com.example.Pricing.model.Promocion;
 import com.example.Pricing.repository.PromocionRepository;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -14,14 +16,10 @@ import com.example.Pricing.services.PromocionService;
 @RequestMapping("/api/promociones")
 public class PromocionController {
 
-    private final PromocionRepository promocionRepository;
-    private final PromocionService promocionService;
-
-
-    public PromocionController(PromocionRepository promocionRepository, PromocionService promocionService) {
-        this.promocionRepository = promocionRepository;
-        this.promocionService = promocionService;
-    }
+    @Autowired
+    private PromocionRepository promocionRepository;
+    @Autowired
+    private PromocionService promocionService;
 
     @GetMapping
     public List<Promocion> obtenerPromociones() {
