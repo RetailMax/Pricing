@@ -16,6 +16,9 @@ public class Promocion {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    @Version
+    private Integer version;
+
     @Column(nullable = false)
     private String nombre;
     
@@ -24,6 +27,8 @@ public class Promocion {
     
     @Column(nullable = false)
     private LocalDateTime fechaInicio;
+
+    @Column(nullable = false)
     private LocalDateTime fechaFin;
     
     @Column(nullable = true)
@@ -32,7 +37,7 @@ public class Promocion {
     @Column(nullable = true)
     private Integer limiteUsuarios; 
     @ManyToOne
-    @JoinColumn(name = "producto_id", nullable = true)
+    @JoinColumn(name = "producto_id", nullable = false)
     private Producto producto;
 
     @Column(nullable = true)

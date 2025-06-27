@@ -15,7 +15,7 @@ public class Variante {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String tipo;  
-    private Float valor; 
+    private Double valor; 
 
     @ManyToOne
     @JoinColumn(name = "producto_id")

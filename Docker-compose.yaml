@@ -1,0 +1,42 @@
+services:
+  pricing:
+    # Indica que la imagen para este servicio se construirá desde el Dockerfile
+    # en el contexto actual (el directorio donde está docker-compose.yml).
+    build:
+      context: .
+    
+    # Mapea puertos desde el host al contenedor.
+    # "8084:8080" significa que el puerto 8084 en tu máquina local
+    # se mapeará al puerto 8080 dentro del contenedor (donde tu aplicación Java escucha).
+    ports:
+      - "8084:8080"
+    
+    # Monta un volumen para el directorio 'wallet'.
+    # Esto permite que los archivos del wallet sean accesibles dentro del contenedor
+    # y que puedas actualizarlos en tu máquina local sin reconstruir la imagen.
+    # "./wallet" es la ruta relativa en tu máquina local.
+    # "/app/wallet" es la ruta dentro del contenedor.
+    volumes:
+      - ./wallet:/app/wallet
+    
+    # Define variables de entorno para la aplicación Java.
+    # Estas variables son inyectadas en el entorno del contenedor y son leídas
+    # por la aplicación Spring Boot para su configuración.
+    environment:
+      - SPRING_APPLICATION_NAME=Pricing
+      - SPRING_DATASOURCE_URL=jdbc:oracle:thin:@b3hlut8r985kh8g3_low?TNS_ADMIN=/app/wallet
+      - SPRING_DATASOURCE_USERNAME=Admin
+      - SPRING_DATASOURCE_PASSWORD=FullStack-001 # ¡Cuidado con contraseñas en texto plano en producción!
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
+      - SPRING_JPA_PROPERTIES_HIBERNATE_DIALECT=org.hibernate.dialect.OracleDialect
+    
+    # Asigna el servicio a una red definida.
+    # Esto facilita la comunicación entre servicios si añades más en el futuro.
+    networks:
+      - backend
+
+# Define las redes utilizadas por los servicios.
+networks:
+  backend:
+    # Utiliza el controlador de red 'bridge', que es el predeterminado para Docker Compose.
+    driver: bridge
