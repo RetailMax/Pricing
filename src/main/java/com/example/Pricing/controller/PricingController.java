@@ -1,5 +1,6 @@
 package com.example.Pricing.controller;
 
+
 import com.example.Pricing.model.PrecioBase;
 import com.example.Pricing.model.Promocion;
 import com.example.Pricing.model.Variante;
@@ -174,4 +175,4 @@ public class PricingController {
 
         return ResponseEntity.ok(precioFinal);
     }
-}
+
