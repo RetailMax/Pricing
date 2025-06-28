@@ -1,5 +1,6 @@
 package com.example.Pricing.controller;
 
+
 import com.example.Pricing.model.Producto;
 import com.example.Pricing.repository.ProductoRepository;
 import org.springframework.http.ResponseEntity;
@@ -11,7 +12,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/productos")
-public class ProductoController {
+public class ProductoController2 {
 
     @Autowired
     private ProductoRepository productoRepository;
