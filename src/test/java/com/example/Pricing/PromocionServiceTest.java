@@ -1,5 +1,6 @@
 package com.example.Pricing;
 
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -25,17 +26,17 @@ import java.util.Optional;
 @SpringBootTest
 public class PromocionServiceTest {
 
-    // @Autowired para inyectar el servicio bajo test
+
     @Autowired
     private PromocionService promocionService;
 
-    // @MockBean para crear y reemplazar los repositorios con mocks en el contexto de Spring
+
     @MockitoBean
     private PromocionRepository promocionRepository;
     @MockitoBean
     private ProductoRepository productoRepository;
 
-    // --- Métodos Helper para crear objetos de prueba ---
+
 
     private Producto createTestProducto(Integer id, String nombre) {
         Producto p = new Producto();
@@ -44,14 +45,14 @@ public class PromocionServiceTest {
         return p;
     }
 
-    private Promocion createTestPromocion(Integer id, String nombre, LocalDateTime fechaInicio, LocalDateTime fechaFin, double descuento, boolean activa, Integer productoId) {
+    private Promocion createTestPromocion(Integer id, String nombre, LocalDateTime fechaInicio, LocalDateTime fechaFin, double descuento, boolean activo, Integer productoId) {
         Promocion promo = new Promocion();
         promo.setId(id);
         promo.setNombre(nombre);
         promo.setFechaInicio(fechaInicio);
         promo.setFechaFin(fechaFin);
-        promo.setDescuento(descuento);
-        promo.setActiva(activa);
+        promo.setPorcentajeDescuento(descuento);
+        promo.setActivo(activo);
         if (productoId != null) {
             promo.setProducto(createTestProducto(productoId, "Producto " + productoId));
         }
@@ -142,7 +143,7 @@ public class PromocionServiceTest {
         
         assertNotNull(activePromotions);
         assertEquals(2, activePromotions.size());
-        assertTrue(activePromotions.get(0).isActiva());
+        assertTrue(activePromotions.get(0).isActivo());
         verify(promocionRepository, times(1)).buscaPromoActiva(true);
     }
 

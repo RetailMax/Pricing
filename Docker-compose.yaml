@@ -10,7 +10,7 @@ services:
       - ./wallet:/app/wallet
     environment:
       - SPRING_APPLICATION_NAME=Pricing
-      - SPRING_DATASOURCE_URL=jdbc:oracle:thin:@XXXX?TNS_ADMIN=/app/wallet
+      - SPRING_DATASOURCE_URL=jdbc:oracle:thin:@Xb3hlut8r985kh8g3_highXXX?TNS_ADMIN=/app/wallet
       - SPRING_DATASOURCE_USERNAME=ADMIN
       - SPRING_DATASOURCE_PASSWORD=FullStack-001
       - SPRING_JPA_HIBERNATE_DDL_AUTO=update
