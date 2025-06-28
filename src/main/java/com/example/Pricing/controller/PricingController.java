@@ -175,4 +175,5 @@ public class PricingController {
 
         return ResponseEntity.ok(precioFinal);
     }
+}
 
