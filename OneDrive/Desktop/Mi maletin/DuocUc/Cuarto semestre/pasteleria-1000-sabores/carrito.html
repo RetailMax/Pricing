@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pastelería 1000 Sabores — Carrito</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&family=Pacifico&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/styles.css" />
+</head>
+<body>
+  <!-- HEADER -->
+  <header class="site-header shadow-sm">
+    <div class="container header-inner d-flex justify-content-between align-items-center py-3">
+      <a class="brand fs-3 text-decoration-none" href="index.html">
+        Pastelería <span class="text-accent">1000 Sabores</span>
+      </a>
+      <nav class="site-nav d-flex gap-3" aria-label="Principal">
+        <a href="index.html" class=" btn btn-outline">Inicio</a>
+        <a href="catalogo.html" class="btn btn-outline">Catálogo</a>
+        <a href="registro.html" class="btn btn-outline">Registro</a>
+        <a href="carrito.html" class="active btn btn-accent">Carrito</a>
+      </nav>
+    </div>
+  </header>
+  <main class="container">
+    <h1 class="display">Tu carrito</h1>
+    <div id="cart" class="cart"></div>
+
+    <section class="card mt">
+      <h2>Datos para boleta</h2>
+      <form id="form-pago" class="form" novalidate>
+        <div class="field">
+          <label for="direccion">Dirección</label>
+          <input id="direccion" name="direccion" type="text" required minlength="5" placeholder="Calle 123, Comuna" />
+          <div class="error" aria-live="polite"></div>
+        </div>
+        <div class="field">
+          <label for="fechaEntrega">Fecha preferida de entrega</label>
+          <input id="fechaEntrega" name="fechaEntrega" type="date" required />
+          <div class="error" aria-live="polite"></div>
+        </div>
+        <div class="field">
+          <label for="mensaje">Mensaje en la torta (opcional)</label>
+          <input id="mensaje" name="mensaje" type="text" maxlength="50" placeholder="¡Feliz Cumpleaños!" />
+          <small class="hint">Máx. 50 caracteres.</small>
+          <div class="error" aria-live="polite"></div>
+        </div>
+        <button class="btn" type="submit">Confirmar pedido</button>
+      </form>
+      <div id="confirmacion" class="alert success mt" hidden>¡Pedido confirmado! Te enviaremos el seguimiento por email.</div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <small>&copy; 2025 Pastelería 1000 Sabores</small>
+    </div>
+  </footer>
+
+  <script src="assets/app.js" defer></script>
+</body>
+</html>

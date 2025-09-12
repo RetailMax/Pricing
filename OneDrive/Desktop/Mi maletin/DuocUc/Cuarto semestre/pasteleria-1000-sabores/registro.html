@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pastelería 1000 Sabores — Únete a nuestra Dulce Comunidad</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&family=Pacifico&display=swap" rel="stylesheet">
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <link rel="stylesheet" href="assets/styles.css" />
+
+</head>
+<body>
+  <header class="site-header shadow-sm">
+    <div class="container header-inner d-flex justify-content-between align-items-center py-3">
+      <a class="brand fs-3 text-decoration-none" href="index.html">
+        Pastelería <span class="text-accent">1000 Sabores</span>
+      </a>
+      <nav class="site-nav d-flex gap-3" aria-label="Principal">
+        <a href="index.html" class=" btn btn-outline">Inicio</a>
+        <a href="catalogo.html" class="btn btn-outline">Catálogo</a>
+        <a href="registro.html" class="active btn btn-accent">Registro</a>
+        <a href="carrito.html" class="btn btn-outline">Carrito</a>
+      </nav>
+    </div>
+  </header>
+    <main class="container">
+
+
+        <div class="registro-card">
+            <h1 class="text-center mb-3 display-6">Únete a nuestra Dulce Comunidad</h1>
+            <p class="text-center lead mb-4 text-muted">Recibe beneficios exclusivos y personaliza tus pedidos con un toque de magia.</p>
+
+
+          
+            <form id="form-registro" novalidate>
+                <div class="mb-3">
+                    <label for="nombre" class="form-label">Nombre completo</label>
+                    <input id="nombre" name="nombre" type="text" class="form-control" required minlength="3" placeholder="Ej: Juanita Pérez" />
+                    <small class="form-text hint">Usa tu nombre real para tus boletas.</small>
+                    <div class="error" aria-live="polite"></div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="email" class="form-label">Correo electrónico</label>
+                    <input id="email" name="email" type="email" class="form-control" required placeholder="tu@correo.com" />
+                    <small class="form-text hint">Si usas tu correo @duoc.cl, ¡sorpresas te esperan!</small>
+                    <div class="error" aria-live="polite"></div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="fechaNac" class="form-label">Fecha de nacimiento</label>
+                    <input id="fechaNac" name="fechaNac" type="date" class="form-control" required />
+                    <small class="form-text hint">Si tienes más de 50 años, ¡un 50% de descuento te espera!</small>
+                    <div class="error" aria-live="polite"></div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="codigo" class="form-label">¿Tienes un código promocional?</label>
+                    <input id="codigo" name="codigo" type="text" class="form-control" placeholder="Ej: FELICES50" />
+                    <small class="form-text hint">Con FELICES50 obtienes un 10% de por vida en tus compras.</small>
+                    <div class="error" aria-live="polite"></div>
+                </div>
+
+                <div class="form-check mb-4">
+                    <input type="checkbox" id="acepto" name="acepto" class="form-check-input" required />
+                    <label class="form-check-label" for="acepto">Acepto los <a href="#" class="text-decoration-none">términos y condiciones</a></label>
+                    <div class="error" aria-live="polite"></div>
+                </div>
+
+                <button class="btn" type="submit">¡Quiero ser parte!</button>
+            </form>
+          
+
+            <div id="resumen-beneficios" class="card mt-4 resumen-beneficios" hidden>
+                </div>
+        </div>
+    </main>
+
+    <footer class="site-footer mt-auto">
+        <div class="container text-center">
+            <small>&copy; 2025 Pastelería 1000 Sabores · 
+                <a href="catalogo.html">Catálogo</a> · 
+                <a href="registro.html">Registro</a>
+            </small>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/app.js" defer></script>
+</body>
+</html>
